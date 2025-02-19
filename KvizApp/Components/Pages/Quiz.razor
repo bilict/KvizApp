@@ -1,0 +1,45 @@
+@page "/quiz"
+@using System.Net.Http.Json
+@using KvizApp.Models
+@inject HttpClient Http
+
+<h3>Take Quiz</h3>
+
+@if (CurrentQuestion != null)
+{
+    <p>@CurrentQuestion.Text</p>
+    @foreach (var option in CurrentQuestion.Options)
+    {
+        <button @onclick="() => SubmitAnswer(option.Id)">@option.Text</button>
+    }
+}
+else
+{
+    <p>Quiz completed!</p>
+}
+
+@code {
+    private Question CurrentQuestion;
+    private int CurrentIndex = 0;
+    private List<Question> Questions;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Questions = await Http.GetFromJsonAsync<List<Question>>("api/questions");
+        if (Questions != null && Questions.Count > CurrentIndex)
+        {
+            CurrentQuestion = Questions[CurrentIndex];
+        }
+    }
+
+    private void SubmitAnswer(int optionId)
+    {
+        if (optionId == CurrentQuestion.CorrectOptionId)
+        {
+            // Process correct answer
+        }
+
+        CurrentIndex++;
+        CurrentQuestion = Questions.Count > CurrentIndex ? Questions[CurrentIndex] : null;
+    }
+}
