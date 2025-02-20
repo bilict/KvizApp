@@ -23,13 +23,13 @@
             <DataAnnotationsValidator/>
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="form-floating mb-3">
-                <InputText @bind-value="Input.TwoFactorCode" class="form-control" autocomplete="off"/>
+                <InputText @bind="Input.TwoFactorCode" class="form-control" autocomplete="off"/>
                 <label for="two-factor-code" class="form-label">Authenticator code</label>
                 <ValidationMessage For="() => Input.TwoFactorCode" class="text-danger"/>
             </div>
             <div class="checkbox mb-3">
                 <label for="remember-machine" class="form-label">
-                    <InputCheckbox @bind-value="Input.RememberMachine"/>
+                    <InputCheckbox @bind="Input.RememberMachine"/>
 
                     Remember this machine
                 </label>
