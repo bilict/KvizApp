@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using System.Text.Json;
+using KvizApp.Components.Account;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using KvizApp.Components.Account.Pages;
+using KvizApp.Components.Account;
 using KvizApp.Components.Account.Pages.Manage;
 using KvizApp.Data;
 
@@ -30,7 +32,8 @@ internal static class IdentityComponentsEndpointRouteBuilderExtensions
             IEnumerable<KeyValuePair<string, StringValues>> query =
             [
                 new("ReturnUrl", returnUrl),
-                new("Action", ExternalLogin.LoginCallbackAction)
+                new("Action", ExternalLoginConstants.LoginCallbackAction)
+
             ];
 
             var redirectUrl = UriHelper.BuildRelative(
