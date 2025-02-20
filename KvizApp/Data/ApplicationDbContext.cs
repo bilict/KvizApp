@@ -2,13 +2,16 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using KvizApp.Models;
 
-namespace KvizApp.Data;
-
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-    : IdentityDbContext<ApplicationUser>(options)
+namespace KvizApp.Data // Correct namespace
 {
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
 
-public DbSet<KvizApp.Models.Option> Option { get; set; } = default!;
-public DbSet<Question> Questions { get; set; }
-
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Option> Options { get; set; }
+    }
 }
