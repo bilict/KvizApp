@@ -1,7 +1,6 @@
 @page "/quiz"
-@inject HttpClient Http
-@using System.Net.Http.Json
 @using KvizApp.Models
+@inject HttpClient Http
 
 <h3>Take Quiz</h3>
 
@@ -19,7 +18,7 @@ else
 }
 
 @code {
-    private List<Question> Questions = new();
+    private List<Question> Questions;
     private Question CurrentQuestion;
     private int CurrentIndex = 0;
 
@@ -36,7 +35,7 @@ else
     {
         if (optionId == CurrentQuestion.CorrectOptionId)
         {
-            // Handle correct answer
+            // Optionally update score or provide feedback...
         }
         CurrentIndex++;
         CurrentQuestion = (Questions.Count > CurrentIndex) ? Questions[CurrentIndex] : null;

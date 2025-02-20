@@ -1,8 +1,8 @@
 @page "/admin/questions"
-@using System.Net.Http.Json
 @using KvizApp.Models
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize(Roles = "Admin")]
+@inject HttpClient Http
 
 <h3>Manage Questions</h3>
 
@@ -12,21 +12,20 @@
 </form>
 
 <ul>
-    @foreach (var question in questionsList)
+    @foreach (var question in questionList)
     {
         <li>@question.Text</li>
     }
 </ul>
 
 @code {
-    [Inject] private HttpClient Http { get; set; }
-    private List<Question> questionsList = new();
+    private List<Question> questionList = new();
     private Question NewQuestion = new();
 
     private async Task AddQuestion()
     {
         await Http.PostAsJsonAsync("api/questions", NewQuestion);
-        questionsList.Add(NewQuestion);
+        questionList.Add(NewQuestion);
         NewQuestion = new();
     }
 }

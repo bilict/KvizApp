@@ -1,8 +1,12 @@
-@page "/"
+@page "/_Host"
 @using KvizApp.Components
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @namespace KvizApp.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null; 
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KvizApp</title>
     <base href="~/" />
-    <link href="css/app.css" rel="stylesheet" />
-    <link href="KvizApp.styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
 <app>
