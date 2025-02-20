@@ -7,6 +7,8 @@
         <UserSecretsId>aspnet-KvizApp-661b8888-b089-4dfb-aa76-510b2d9020e8</UserSecretsId>
     </PropertyGroup>
 
+    
+
     <ItemGroup>
         <None Update="Data\app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
     </ItemGroup>
@@ -39,4 +41,10 @@
       <AdditionalFiles Include="Layout\NavMenu.razor" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers\" />
+    </ItemGroup>
+    <PropertyGroup>
+        <UseRazorSourceGenerator>false</UseRazorSourceGenerator>
+    </PropertyGroup>
 </Project>

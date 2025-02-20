@@ -1,36 +1,95 @@
 ﻿@page "/Error"
-@using System.Diagnostics
+@using Microsoft.AspNetCore.Components.Web
+@inject NavigationManager Navigation
 
 <PageTitle>Error</PageTitle>
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="error-container">
+    <h1>Oops! Something went wrong.</h1>
 
-@if (ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@RequestId</code>
-    </p>
+    @if (ErrorStatusCode.HasValue)
+    {
+        <h2>HTTP @ErrorStatusCode</h2>
+    }
+    else
+    {
+        <h2>Application Error</h2>
+    }
+
+    @if (ShowDetails)
+    {
+        <div class="error-details">
+            <p>@ErrorMessage</p>
+            @if (!string.IsNullOrEmpty(RequestPath))
+            {
+                <p><strong>Path:</strong> @RequestPath</p>
+            }
+        </div>
+    }
+    else
+    {
+        <p>An unexpected error has occurred. Please try again later.</p>
+    }
+
+    <button class="btn btn-primary" @onclick="ReturnHome">
+        Return to Home
+    </button>
+</div>
+
+@code {
+    [Parameter]
+    public int? ErrorStatusCode { get; set; }
+
+    [Parameter]
+    public string? RequestPath { get; set; }
+
+    private string ErrorMessage { get; set; } = "An error occurred while processing your request.";
+    private bool ShowDetails => appEnvironment.IsDevelopment();
+
+    [Inject]
+    private IWebHostEnvironment appEnvironment { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        // Customize messages based on status code
+        if (ErrorStatusCode.HasValue)
+        {
+            ErrorMessage = ErrorStatusCode switch
+            {
+                404 => "The requested resource was not found.",
+                403 => "You are not authorized to view this content.",
+                _ => $"HTTP {ErrorStatusCode} error occurred."
+            };
+        }
+
+        // Get current path if not provided
+        RequestPath ??= Navigation.Uri.Replace(Navigation.BaseUri, "/");
+    }
+
+    private void ReturnHome() => Navigation.NavigateTo("/");
 }
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+<style>
+    .error-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        text-align: center;
+    }
 
-@code{
-    [CascadingParameter] private HttpContext? HttpContext { get; set; }
+    .error-details {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 1rem 0;
+        text-align: left;
+    }
 
-    private string? RequestId { get; set; }
-    private bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-
-    protected override void OnInitialized() =>
-        RequestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
-
-}
+    .btn {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
