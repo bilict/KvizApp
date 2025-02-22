@@ -7,7 +7,7 @@
         <UserSecretsId>aspnet-KvizApp-661b8888-b089-4dfb-aa76-510b2d9020e8</UserSecretsId>
     </PropertyGroup>
 
-    
+
 
     <ItemGroup>
         <None Update="Data\app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
@@ -19,32 +19,30 @@
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.13" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Components\Layout\MainLayout.razor" />
-      <_ContentIncludedByDefault Remove="Components\Layout\NavMenu.razor" />
+        <_ContentIncludedByDefault Remove="Components\Layout\MainLayout.razor" />
+        <_ContentIncludedByDefault Remove="Components\Layout\NavMenu.razor" />
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Layout\MainLayout.razor" />
-      <AdditionalFiles Include="Layout\NavMenu.razor" />
+        <AdditionalFiles Include="Layout\MainLayout.razor" />
+        <AdditionalFiles Include="Layout\NavMenu.razor" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+        <Folder Include="Controllers\" />
     </ItemGroup>
-    <PropertyGroup>
-        <UseRazorSourceGenerator>false</UseRazorSourceGenerator>
-    </PropertyGroup>
+
 </Project>

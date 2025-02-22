@@ -26,6 +26,8 @@ app.UseRouting();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseAntiforgery();
+
 
 // Configure endpoints in the proper order.
 app.UseEndpoints(endpoints =>
@@ -33,12 +35,13 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-    
+
     endpoints.MapControllers();
     endpoints.MapRazorPages();
 
     // For Blazor Components
-    endpoints.MapRazorComponents<App>()
+    endpoints.MapRazorComponents<KvizApp.Components.App>()
+
         .AddInteractiveServerRenderMode();
 });
 
