@@ -30,19 +30,19 @@ app.UseAntiforgery();
 
 
 // Configure endpoints in the proper order.
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
-    endpoints.MapControllers();
-    endpoints.MapRazorPages();
+        endpoints.MapControllers();
+        endpoints.MapRazorPages();
 
-    // For Blazor Components
-    endpoints.MapRazorComponents<KvizApp.Components.App>()
+        // For Blazor Components
+        endpoints.MapRazorComponents<KvizApp.Components.App>()
 
-        .AddInteractiveServerRenderMode();
-});
+            .AddInteractiveServerRenderMode();
+    });
 
 app.Run();
