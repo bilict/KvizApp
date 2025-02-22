@@ -14,6 +14,11 @@ builder.Services.AddRazorComponents()
 // Build the application.
 var app = builder.Build();
 
+//cookies
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie();
+    
+
 // Configure middleware.
 if (!app.Environment.IsDevelopment())
 {
